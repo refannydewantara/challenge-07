@@ -1,0 +1,539 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.page-one {
+  height: 960px;
+  background: url(img/main-bg.jpg);
+  background-size: cover;
+  position: relative;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 100%;
+  background-position: bottom;
+}
+
+.page-one .navbar-block {
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  z-index: 10;
+}
+
+.page-one .navbar-block .navbar-button {
+  text-align: end;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: end;
+}
+
+.page-one .navbar-block .bi-list {
+  color: #fff;
+}
+
+@media only screen and (min-width: 767px) {
+  .page-one .navbar-block .md-hide {
+    display: none;
+  }
+}
+
+.page-one .navbartop {
+  width: 100%;
+}
+
+.page-one .navbartop .navbar-brand {
+  margin-left: 1.5em;
+  margin-top: 0.5em;
+  font-weight: 600;
+}
+
+.page-one .navbartop .navbar-nav {
+  width: 100%;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.page-one .row-content {
+  margin-top: 24vh;
+  font-size: 4.8rem;
+  font-weight: 600;
+  letter-spacing: 2pt;
+}
+
+.page-one .row-desc {
+  margin-top: 1em;
+  font-size: 1.5em;
+  margin-top: 1.5rem;
+  letter-spacing: 1pt;
+}
+
+.page-one .row-button {
+  margin-top: 3em;
+}
+
+.page-one .row-button span {
+  font-weight: 700;
+}
+
+.page-one .row-arrow {
+  margin-top: 30vh;
+}
+
+@media only screen and (max-width: 767px) {
+  .page-one .row-content .title span {
+    font-size: 2rem;
+    line-height: 1rem;
+    letter-spacing: 0;
+  }
+}
+
+.page-two {
+  height: 960px;
+  background: url(img/the-games-bg.jpg);
+  background-size: cover;
+  margin-top: -4vh;
+}
+
+.page-two .page-hero {
+  margin-top: 20vh;
+}
+
+.page-two .page-content {
+  margin-top: 20vh;
+}
+
+.page-two .page-content .carousel-indicators {
+  width: 50%;
+  margin: 1em auto;
+  -ms-grid-column-align: center;
+  justify-self: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.page-two .page-content .carousel-indicators button {
+  border: 2px solid white;
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.page-two .page-content .carousel-indicators .active {
+  background-color: #fff;
+  opacity: 1;
+}
+
+.page-two .page-content img {
+  height: 50vh;
+}
+
+.page-two .page-content .bi-caret-left {
+  margin-left: -15vw;
+  font-size: 2em;
+}
+
+.page-two .page-content .bi-caret-right {
+  margin-right: -15vw;
+  font-size: 2em;
+}
+
+.page-three {
+  height: 960px;
+  background: url(img/features.jpg);
+  background-size: cover;
+}
+
+.page-three .page-hero {
+  padding-top: 20vh;
+}
+
+.page-three .page-hero .cont-title {
+  margin-left: 1.5rem;
+}
+
+.page-three .page-content {
+  padding-left: 5vw;
+}
+
+.page-three .page-content .cont-line {
+  width: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 3rem;
+  padding: 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.page-three .page-content .cont-line * {
+  margin: 0;
+}
+
+.page-three .page-content .cont-line .circle {
+  height: 1rem;
+  width: 1rem;
+  border: 1px solid white;
+}
+
+.page-three .page-content .cont-line .line {
+  height: 7rem;
+  width: 1px;
+}
+
+.page-three .page-content .cont-line .space {
+  height: 2.5rem;
+  width: 1px;
+  margin-left: 1.5rem;
+}
+
+.page-three .page-content .cont-content {
+  margin-top: 3rem;
+  width: 300px;
+}
+
+.page-four {
+  height: 960px;
+  background: url(img/requirements.png);
+  background-size: cover;
+}
+
+.page-four .bg-layer {
+  background: radial-gradient(
+    33.26% 45% at 64.32% 47.1%,
+    rgba(255, 255, 255, 0) 3.36%,
+    rgba(0, 0, 0, 0) 19.22%,
+    #080a0b 98%
+  );
+  height: 100%;
+}
+
+.page-four .page-hero {
+  margin-top: 10vh;
+}
+
+.page-four .page-quotes {
+  margin-top: 5vh;
+}
+
+.page-four .page-content::before {
+  content: "";
+  margin-left: -1vh;
+  position: absolute;
+  width: 560px;
+  height: 500px;
+  background: url(img/bg-sys.svg);
+  background-size: 560px;
+  background-repeat: no-repeat;
+  -webkit-filter: brightness(2);
+  filter: brightness(2);
+}
+
+@media only screen and (max-width: 576px) {
+  .page-four {
+    height: unset;
+  }
+  .page-four .page-hero {
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+    margin-top: 0;
+  }
+  .page-four .page-content::before {
+    background: none;
+  }
+  .page-four .page-content .row div {
+    border: 1px solid grey;
+  }
+  .page-four .page-content .cont-content1,
+  .page-four .page-content .cont-content2,
+  .page-four .page-content .cont-content3 {
+    margin-top: 0 !important;
+    width: 100vw !important;
+  }
+}
+
+.page-four .page-content {
+  margin-top: 5vh;
+  width: 560px;
+  height: 500px;
+}
+
+.page-four .page-content .cont-content1 {
+  width: 560px;
+  margin-top: 10px;
+}
+
+.page-four .page-content .cont-content2 {
+  width: 560px;
+  margin-top: 24px;
+}
+
+.page-four .page-content .cont-content3 {
+  width: 560px;
+  margin-top: 56px;
+}
+
+.page-five {
+  background: url(img/bg-top-scores.jpg);
+  background-size: cover;
+}
+
+.page-five .bg-layer {
+  background: url(img/top-score-bg.png);
+  height: 100%;
+  background-size: cover;
+}
+
+.page-five .row-content {
+  padding-top: 8vh;
+}
+
+.page-five .page-hero {
+  margin-top: 30vh;
+}
+
+.page-five .page-hero button {
+  padding: 0.75rem 3rem;
+  margin-top: 1.5rem;
+}
+
+.page-five .page-content .cont-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-top: 3rem;
+  padding: 1.5rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.page-five .page-content .cont-card .avatar {
+  height: 60px;
+  width: 60px;
+  border: 1px solid white;
+  border-radius: 50%;
+  -webkit-box-shadow: 12px 4px #ffb548;
+  box-shadow: 12px 4px #ffb548;
+  background-size: cover;
+}
+
+.page-five .page-content .cont-card .evan {
+  background: url(img/evan.JPG);
+}
+
+.page-five .page-content .cont-card .jada {
+  background: url(img/jada.jpg);
+}
+
+.page-five .page-content .cont-card .aaron {
+  background: url(img/aaron.jpg);
+}
+
+.page-five .page-content .cont-card .cont-card-title {
+  margin-top: 0.5rem;
+}
+
+.page-five .page-content .cont-card .cont-card-subtitle {
+  color: #aaa;
+  margin-top: -4px;
+}
+
+.page-five .page-content .cont-card .cont-card-text {
+  margin-top: 0.5rem;
+}
+
+.page-five .page-content .cont-card .cont-card-date {
+  display: block;
+  margin-top: 1em;
+  color: #aaaaaa;
+}
+
+@media only screen and (max-width: 992px) {
+  .page-five .page-hero {
+    margin-top: 0;
+  }
+  .page-five .row.row-content {
+    padding: 4px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .page-five .row.row-content .page-hero {
+    margin: 0;
+    text-align: center;
+  }
+  .page-five .row.row-content .page-content .row {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .page-five .row.row-content .page-content .row div {
+    margin-left: 0;
+  }
+}
+
+.page-six {
+  height: 960px;
+  background: #080a0b;
+}
+
+.page-six .bg-layer .skull-img {
+  height: 72vh;
+  background: url(img/skull.jpg);
+  background-size: 100%;
+  margin-top: 10vh;
+  background-repeat: no-repeat;
+}
+
+.page-six .bg-layer .skull-overlay {
+  margin: -1px 0 0 -1px;
+  height: 101%;
+  width: 101%;
+  background: radial-gradient(
+    45.43% 53.19% at 50% 50%,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0) 46.15%,
+    #080a0b 99.74%
+  );
+}
+
+@media only screen and (max-width: 992px) {
+  .page-six .bg-layer {
+    display: none;
+  }
+}
+
+.page-six .page-content {
+  margin-top: 20vh;
+}
+
+.page-six .page-content .email-form {
+  height: 6vh;
+}
+
+.page-six .page-content .email-form .email-label {
+  position: absolute !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #aaa;
+  margin: 2px 0 0 12px;
+}
+
+.page-six .page-content .email-form input {
+  height: 100%;
+  font-size: 1.5em;
+  padding-top: 16px;
+  color: #ffb548;
+}
+
+.page-six .page-content .email-form button {
+  height: 100%;
+  width: 100%;
+}
+
+.page-six .page-footer {
+  margin-top: 6vh;
+}
+
+.page-six .page-footer .footer-menu {
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.page-six .page-footer .footer-menu li {
+  list-style: none;
+  text-decoration: none;
+}
+
+.page-six .page-footer .footer-menu li a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-six .page-footer .footer-socmed {
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.page-six .page-footer .footer-socmed li {
+  list-style: none;
+}
+
+.page-six .page-copyright {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 2vh;
+}
+
+.page-six .copy-text {
+  padding: 0;
+  width: 84%;
+  border-top: 1px solid white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.page-six .copy-text .quotes {
+  color: #aaaaaa;
+}
+
+.page-six .copy-text .policy {
+  text-align: end;
+}
+
+@media only screen and (max-width: 992px) {
+  .page-six .copy-text {
+    text-align: center !important;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .page-six .copy-text .policy {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .page-six .page-content {
+    margin-top: 5vh;
+  }
+  .page-six .page-content .email-form {
+    height: unset;
+  }
+  .page-six .page-footer {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+/*# sourceMappingURL=style.css.map */

@@ -99,11 +99,18 @@ class Human {
                         };
                     break;
             }
-            console.log('Result : ' + result)
+            
 
             document.querySelector('.start').classList.add('hidden');
             document.querySelector('.game.result').classList.remove('hidden');
             document.querySelector('.game.result').innerHTML = result;
+            let date = new Date()
+            let score = result.slice(-4)
+
+            document.querySelector('.result-box').innerHTML += `<div class="result game001">
+            <div class="score">${score}</div>
+            <div class="date">${date}</div>
+        </div>`
             
             
             

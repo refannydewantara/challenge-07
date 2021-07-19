@@ -82,20 +82,20 @@
 
     <!-- Login layer -->
     <div class="loginlayer hide">
-      <div method="POST" class="login">
+      <form method="POST" action="../login" class="login">
         <div class="close">
           <i class="bi bi-x-square-fill"></i>
         </div>
         <label for="user"><i class="bi bi-person"></i></label>
 
-        <input type="text" placeholder="User" id="inputuser">
+        <input type="text" placeholder="User" id="inputuser" name="username">
         <br>
         <label for="password"><i class="bi bi-lock"></i></label>
 
-        <input type="password" placeholder="Password" id="inputpass">
+        <input type="password" placeholder="Password" id="inputpass" name="userpwd">
         <br>
-        <button>Login</button>
-      </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
 
     <!-- Content -->
@@ -113,8 +113,8 @@
       <div class="row row-button">
         <div class="col-sm-12 text-center">
 
-          <button type="button" class="btn btn-warning px-5 py-3 play"><span class="align-middle">PLAY
-              NOW</span></button>
+          <button type="button" class="btn btn-warning px-5 py-3 play"><span class="align-middle">SIGN
+              IN</span></button>
 
         </div>
       </div>

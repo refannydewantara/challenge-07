@@ -14,8 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Usergame_history.init({
-    nickname: DataTypes.STRING,
-    record: DataTypes.STRING
+    roomno : DataTypes.STRING,
+    user1 : DataTypes.STRING,
+    choice1 : DataTypes.STRING,
+    user2: DataTypes.STRING,
+    choice2: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Usergame_history',

@@ -2,32 +2,43 @@ const express = require ('express')
 const exphbs = require ('express-handlebars')
 const bodyParser = require ('body-parser')
 const path = require ('path')
+const jwt = require ('jsonwebtoken')
+const cookieParser = require('cookie-parser')
+
 
 
 
 const app = express()
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
-const port = 3001
-
-
-
-
-
+const port = 8080
 
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
-
-app.locals.titles = require ("./titles.json");
+//controller
+const usersController = require('./controllers/usersController')
 
 // routing index
 app.get('/', (req, res) => {
-    res.render('index', {
-        "title" : "Traditional Games"
-    })
+
+    if (req.cookies.auth){
+        res.redirect('play')
+    } else {
+        res.render('index', {
+            "title" : "Traditional Games"
+        })
+    }
+    
+})
+
+app.get('/logout', (req, res) => {
+
+    res.clearCookie('auth')
+    res.redirect('/')
     
 })
 
@@ -38,53 +49,13 @@ app.get('/play', (req, res) => {
     })
 })
 
-//routing admin
-app.get('/admin', async(req, res) => {
-
-    try{
-
-        const users = await Usergame.findAll()
-        let alldata = []
-        users.forEach(user =>{
-            let data = `<div class="data user1">
-                            <div class="user-id">
-                                ${user.id}
-                            </div>
-                            <div class="user-nickname">
-                                ${user.nickname}
-                            </div>
-                            <div class="user-email">
-                                ${user.email}
-                            </div>
-                            <div class="user-username">
-                                ${user.username}
-                            </div>
-                            <div class="user-action">
-                            <a href="../update/${user.id}">
-                            <div class="update">
-                                Update
-                            </div>
-                            </a>
-                                <a href="../delete/${user.id}">
-                                <div class="delete">
-                                    Delete
-                                </div>
-                                </a>
-                            </div>
-                    </div>`
-            alldata += data
-        })
-
-        res.render('admin', {
-            "alldata" : alldata
-        })
-    }
-
-    catch(err){
-        res.send(err)
-    }
-
+//fight room
+app.get('/play/room1', (req, res) => {
+    res.render('fight')
 })
+
+//routing admin
+app.get('/admin', usersController.getAll)
 
 app.get('/register', (req, res) => {
     res.render('register', {
@@ -95,141 +66,86 @@ app.get('/register', (req, res) => {
 
 
 
-
-
 //sequelize
-const { sequelize, Usergame, Usergame_bio } = require('./models')
+const { sequelize, Usergame, Usergame_bio, Usergame_history } = require('./models')
+
+app.post('/history', async(req,res)=>{
+    try{
+        const hist = await Usergame_history.findAll()
+        res.send(hist)
+    }
+
+    catch(err){
+        return res.status(403).json(err)
+    }
+
+    
+})
+
 
 //CRUD sequelize
     //Create
-app.post('/users', async(req,res) => {
-    const { nickname, email, username, userpwd } = req.body
-
-    try{
-        const usergame = await Usergame.create({ nickname, email, username, userpwd })
-        const usergame_bio = await Usergame_bio.create({ nickname, email })
-
-        
-        res.redirect('/admin')
-    }
-    catch(err){
-        return res.status(500).json(err)
-    }
-})
+app.post('/users', usersController.createUser)
 
 
     //Update
-app.get('/update/:id', async(req, res) => {
-
-    try{
-        
-        const user = await Usergame.findOne({
-            where : {
-                id: parseInt(req.params.id)
-            }
-        }) 
-        res.render('update', {user})
-    }
-    catch(err){
-        return res.status(500).json(err)
-    }
- })
-
- app.post('/update', async(req,res) => {
-    const { id, nickname, email, username, userpwd } = req.body
-    
-    try{
-        await Usergame.update({ nickname, email, username, userpwd },{
-            where: {
-                id : parseInt(id)
-            }})
-        await Usergame_bio.update({ nickname, email }, {
-            where: {
-            id : parseInt(id)
-        }})
-
-        const users = await Usergame.findAll()
-        res.redirect('../../admin')
-    }
-    catch(err){
-        return res.status(500).json(err)
-    }
-})
+app.get('/update/:id', usersController.getUpdate)
+app.post('/update', usersController.postUpdate)
 
     //Delete
-app.get('/delete/:id', async(req,res) => {
-    try{
-        
-        
-        await Usergame.destroy({
-            where : {
-                id: parseInt(req.params.id)
-            }
-        })
-
-        await Usergame_bio.destroy({
-            where : {
-                id: parseInt(req.params.id)
-            }
-        })
-
-        res.redirect('../../admin')
-    }
-
-    catch(err){
-        return res.status(500).json(err)
-    }
-})
-
-//login validation
-const staticuser = require ('./staticuser.json')
-
-app.post('/login', async(req,res) => {
-
-    try{
+app.get('/delete/:id', usersController.deleteUser)
 
 
-        //ambil data users player dari database
-        const users = await Usergame.findAll()
+//login
+app.post('/login', usersController.loginUser)
 
-        let usernames = []
-        users.forEach(element => {
-            usernames.push(element.username)
-        });
-        
 
-        let userpwds = []
-        users.forEach(element => {
-            userpwds.push(element.userpwd)
-        });
-
-    //login admin - static user
+app.get('/play/room1/:input', async(req,res)=> {
     
-    if(req.body.username == staticuser.username && req.body.userpwd == staticuser.password){
-        res.redirect('admin')
-    } else 
-    if(usernames.includes(req.body.username)){
-
-        const index = usernames.indexOf(req.body.username)
-
-        if(req.body.userpwd == userpwds[index]){
-            res.redirect('play')
-        } else {
-            res.send('password salah')
-        }
-    } else {
-        res.send('user tidak ada')
-    }
-
+    try{
+        
         
 
-    //login user player
+        if(req.cookies.auth !== null){
+            const token = req.cookies.auth
+            const decoded = jwt.decode(token)
 
-    res.send(usernames)
+            const history = await Usergame_history.findAll()
 
-    }
+            const cekroom = await Usergame_history.findOne({
+                where : {
+                    roomno: 'room1'
+                }
+            })
+
+            if(!cekroom){
+                const usergame_history = await Usergame_history.create({
+                    roomno: 'room1',
+                    user1: decoded.username,
+                    choice1: req.params.input
+                })
+                res.send('anda : ' + decoded.username +' telah memilih')
+            } 
+            else {
+                await Usergame_history.update({
+                    user2: decoded.username,
+                    choice2: req.params.input,
+                },{
+                    where : {
+                    roomno: 'room1'
+                    }})
+
+                res.send('anda : ' + decoded.username +' telah memilih')
+            }}
+
+        else {
+            res.send('Token not valid')
+        }
+        }
+    
+
     catch(err){
-        console.log(err)
+        return res.send('ada yang salah-->' + err)
     }
 })
 
@@ -237,7 +153,9 @@ app.post('/login', async(req,res) => {
 
 //error handler
 app.use((req, res,next)=>{
-    res.status(404).render('notFound');
+    res.status(404).render('notFound', {
+        "title" : "Anda tersesat"
+    });
  });
  
 

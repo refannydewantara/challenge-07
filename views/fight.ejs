@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!-- Style CSS -->
-    <link href="play.css" rel="stylesheet">
+    <link href="../play.css" rel="stylesheet">
 
-    <title><%=title%></title>
+    <title>FIGHT!</title>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                     </a>
                 </div>
                 <div class="icon">
-                    <img src="img/logo 1.png" alt="">
+                    <img src="../img/logo 1.png" alt="">
                 </div>
                 <div class="title">ROCK PAPER SCISSORS</div>
             </div>
@@ -37,58 +37,27 @@
 
     <div class="container-fluid game-play">
         <div class="row">
-            <div class="col-md-1"></div>
+            <div class="col-md-5"></div>
             <div class="col-md-2 col-4 tokens">
                 <div class="player">
-                    HUMAN
+                    CHOOSE
                 </div>
-                <button class="human token rock">
-                    <img src="img/rock.png" alt="" class="humans">
-                </button>
-                <button class="human token paper">
-                    <img src="img/paper.png" alt="" class="humans">
-                </button>
-                <button class="human token scissor">
-                    <img src="img/scissor.png" alt="" class="humans">
-                </button>
+                <a href="room1/r">
+                    <button class="human token rock">
+                        <img src="../img/rock.png" alt="" class="humans">
+                    </button>
+                </a>
+                <a href="room1/p">
+                    <button class="human token paper">
+                        <img src="../img/paper.png" alt="" class="humans">
+                    </button>
+                </a>
+                <a href="room1/s">
+                    <button class="human token scissor" href="/s">
+                        <img src="../img/scissor.png" alt="" class="humans">
+                    </button>
+                </a>
             </div>
-            <div class="col-md-2 col-4 mecha">
-                <div class="row play">
-                    <div class="start">VS</div>
-                    <div class="game result hidden"></div>
-
-                </div>
-                <div class="row again">
-                    <div class="reset">
-                        <img src="img/reset.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-4 tokens">
-                <div class="com">
-                    COMPUTER
-                </div>
-                <div class="com token rock">
-                    <img src="img/rock.png" alt="">
-                </div>
-                <div class="com token paper">
-                    <img src="img/paper.png" alt="">
-                </div>
-                <div class="com token scissor">
-                    <img src="img/scissor.png" alt="">
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 result result-box">
-                <div class="title">HISTORY</div>
-                <div class="header">
-                    <div class="score">Result</div>
-                    <div class="date">Time Log</div>
-                </div>
-
-
-            </div>
-            <div class="col-md-1"><a href="../logout">LOGOUT</a></div>
         </div>
 
 

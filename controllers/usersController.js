@@ -202,6 +202,139 @@ usersController.loginUser = async(req,res) => {
     }
 }
 
+usersController.goFight = async(req,res)=> {
+    
+    try{
+        
+        let url = req.url
+        let room = url.substring(6,11)
+        
+        if(req.cookies.auth !== null){
+            const token = req.cookies.auth
+            const decoded = jwt.decode(token)
+
+            const history = await Usergame_history.findAll()
+
+            const thisRoom = await Usergame_history.findOne({
+                where : {
+                    roomno: room
+                }
+            })
+
+            if(!thisRoom){
+                const usergame_history = await Usergame_history.create({
+                    roomno: room,
+                    user1: decoded.username,
+                    choice1: req.params.input
+                })
+                res.redirect(`../${room}-result`)
+            } 
+            else {
+                //Player yang sama tidak boleh memilih 2x
+                if(thisRoom.user1 == decoded.username){
+                    res.send('Tidak boleh memilih 2 kali!')
+                } else {
+
+                    await Usergame_history.update({
+                        user2: decoded.username,
+                        choice2: req.params.input,
+                    },{
+                        where : {
+                        roomno: room
+                        }})
+    
+                    res.redirect(`../${room}-result`)
+                }
+
+            }}
+
+        else {
+            res.send('Token not valid')
+        }
+        }
+    
+
+    catch(err){
+        return res.send('ada yang salah-->' + err)
+    }
+}
+
+usersController.getResult = async(req,res) => {
+    try{
+        let url = req.url
+        let room = url.substring(6,11)
+
+        const history = await Usergame_history.findAll()
+        const data = await Usergame_history.findOne({
+            where : {
+                roomno: room
+            }
+        })
+
+        var hasil
+        //cek apakah 2 player telah memilih
+        if (data.choice1 !== null && data.choice2 !== null){
+
+            if(data.choice1 == 'p'){
+                switch(data.choice2){
+                    case 'p' :
+                        hasil = 'Draw. Fair fight!'
+                        break
+                    case 'r' :
+                        hasil = `User '${data.user1}' win`
+                        break
+                    case 's' :
+                        hasil = `User '${data.user2}' win`
+                        break
+
+                }
+
+            } else if(data.choice1 == 'r'){
+                switch(data.choice2){
+                    case 'p' :
+                        hasil = `User '${data.user2}' win`
+                        break
+                    case 'r' :
+                        hasil = 'Draw. Fair fight!'
+                        break
+                    case 's' :
+                        hasil = `User '${data.user1}' win`
+                        break
+                }
+
+            } else if(data.choice1 == 's'){
+                switch(data.choice2){
+                    case 'p' :
+                        hasil = `User '${data.user1}' win`
+                        break
+                    case 'r' :
+                        hasil = `User '${data.user2}' win`
+                        break
+                    case 's' :
+                        hasil = 'Draw. Fair fight!'
+                        break
+                }
+            }
+
+        } else {
+            hasil = 'Menunggu player lain memilih'
+        }
+        
+        res.send(hasil)
+        await Usergame_history.update({
+            result: hasil
+        },{
+            where : {
+            roomno: room
+            }})
+
+    }
+
+    catch(err){
+        res.send(err)
+    }
+}
+
 
 
 module.exports = usersController

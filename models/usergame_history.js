@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     user1 : DataTypes.STRING,
     choice1 : DataTypes.STRING,
     user2: DataTypes.STRING,
-    choice2: DataTypes.STRING
+    choice2: DataTypes.STRING,
+    result:DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Usergame_history',

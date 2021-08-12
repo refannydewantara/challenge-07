@@ -49,10 +49,7 @@ app.get('/play', (req, res) => {
     })
 })
 
-//fight room
-app.get('/play/room1', (req, res) => {
-    res.render('fight')
-})
+
 
 //routing admin
 app.get('/admin', usersController.getAll)
@@ -68,6 +65,7 @@ app.get('/register', (req, res) => {
 
 //sequelize
 const { sequelize, Usergame, Usergame_bio, Usergame_history } = require('./models')
+const { goFight } = require('./controllers/usersController')
 
 app.post('/history', async(req,res)=>{
     try{
@@ -100,54 +98,41 @@ app.get('/delete/:id', usersController.deleteUser)
 app.post('/login', usersController.loginUser)
 
 
-app.get('/play/room1/:input', async(req,res)=> {
-    
-    try{
+
+//fight room
+app.get('/play/room1', (req, res) => {
+    res.render('fight', {
+        "title" : "Let's Play!",
+        "room" : "room1"
         
-        
-
-        if(req.cookies.auth !== null){
-            const token = req.cookies.auth
-            const decoded = jwt.decode(token)
-
-            const history = await Usergame_history.findAll()
-
-            const cekroom = await Usergame_history.findOne({
-                where : {
-                    roomno: 'room1'
-                }
-            })
-
-            if(!cekroom){
-                const usergame_history = await Usergame_history.create({
-                    roomno: 'room1',
-                    user1: decoded.username,
-                    choice1: req.params.input
-                })
-                res.send('anda : ' + decoded.username +' telah memilih')
-            } 
-            else {
-                await Usergame_history.update({
-                    user2: decoded.username,
-                    choice2: req.params.input,
-                },{
-                    where : {
-                    roomno: 'room1'
-                    }})
-
-                res.send('anda : ' + decoded.username +' telah memilih')
-            }}
-
-        else {
-            res.send('Token not valid')
-        }
-        }
-    
-
-    catch(err){
-        return res.send('ada yang salah-->' + err)
-    }
+    })
 })
+app.get('/play/room2', (req, res) => {
+    res.render('fight', {
+        "title" : "Let's Play!",
+        "room" : "room2"
+        
+    })
+})
+app.get('/play/room3', (req, res) => {
+    res.render('fight', {
+        "title" : "Let's Play!",
+        "room" : "room3"
+        
+    })
+})
+
+
+
+
+app.get('/play/room1/:input', usersController.goFight)
+app.get('/play/room2/:input', usersController.goFight)
+app.get('/play/room3/:input', usersController.goFight)
+
+app.get('/play/room1-result', usersController.getResult)
+app.get('/play/room2-result', usersController.getResult)
+app.get('/play/room3-result', usersController.getResult)
+
 
 
 

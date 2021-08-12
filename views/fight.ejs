@@ -14,7 +14,7 @@
     <!-- Style CSS -->
     <link href="../play.css" rel="stylesheet">
 
-    <title>FIGHT!</title>
+    <title><%=room%></title>
 </head>
 
 <body>
@@ -31,6 +31,7 @@
                     <img src="../img/logo 1.png" alt="">
                 </div>
                 <div class="title">ROCK PAPER SCISSORS</div>
+                <div class="col-md-1 logout"><a href="../logout"><i class="bi bi-power"></i></a></div>
             </div>
         </div>
     </div>
@@ -42,18 +43,19 @@
                 <div class="player">
                     CHOOSE
                 </div>
-                <a href="room1/r">
+                <a href=<%=room+'/r'%>>
                     <button class="human token rock">
                         <img src="../img/rock.png" alt="" class="humans">
                     </button>
                 </a>
-                <a href="room1/p">
+                <a href=<%=room+'/p'%>>
                     <button class="human token paper">
                         <img src="../img/paper.png" alt="" class="humans">
                     </button>
                 </a>
-                <a href="room1/s">
-                    <button class="human token scissor" href="/s">
+                <a href=<%=room+'/s'%>>
+                    <button class=" human token scissor">
+
                         <img src="../img/scissor.png" alt="" class="humans">
                     </button>
                 </a>
